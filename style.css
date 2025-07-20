@@ -1,0 +1,143 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #000;
+    color: #00ff00;
+    font-family: 'Courier New', monospace;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    overflow: hidden;
+}
+
+.game-container {
+    text-align: center;
+    position: relative;
+}
+
+.game-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #111;
+    border: 2px solid #00ff00;
+    margin-bottom: 10px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.score, .lives, .level {
+    color: #00ff00;
+}
+
+#gameCanvas {
+    border: 2px solid #00ff00;
+    background-color: #000;
+    display: block;
+    margin: 0 auto;
+}
+
+.game-controls {
+    margin-top: 10px;
+    padding: 10px;
+    background-color: #111;
+    border: 2px solid #00ff00;
+}
+
+.instructions {
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.instructions p {
+    margin: 5px 0;
+}
+
+.game-over, .start-screen {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.9);
+    border: 3px solid #00ff00;
+    padding: 30px;
+    text-align: center;
+    z-index: 100;
+}
+
+.game-over h2, .start-screen h1 {
+    color: #ff0000;
+    margin-bottom: 20px;
+    font-size: 32px;
+}
+
+.start-screen h1 {
+    color: #00ff00;
+    font-size: 36px;
+}
+
+.game-over p, .start-screen p {
+    margin: 10px 0;
+    font-size: 18px;
+}
+
+#restartButton {
+    background-color: #00ff00;
+    color: #000;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-family: 'Courier New', monospace;
+    cursor: pointer;
+    margin-top: 15px;
+}
+
+#restartButton:hover {
+    background-color: #00cc00;
+}
+
+.hidden {
+    display: none;
+}
+
+/* レスポンシブデザイン */
+@media (max-width: 850px) {
+    #gameCanvas {
+        width: 100%;
+        max-width: 800px;
+        height: auto;
+    }
+    
+    .game-header {
+        font-size: 16px;
+        padding: 8px 15px;
+    }
+    
+    .instructions {
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 600px) {
+    .game-header {
+        flex-direction: column;
+        gap: 5px;
+        font-size: 14px;
+    }
+    
+    .game-over, .start-screen {
+        width: 90%;
+        padding: 20px;
+    }
+    
+    .game-over h2, .start-screen h1 {
+        font-size: 24px;
+    }
+}
+

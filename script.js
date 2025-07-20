@@ -48,6 +48,7 @@ let playerBullet = null;
 let invaders = [];
 let invaderBullets = [];
 let barriers = [];
+let animationId = null;
 let ufo = null;
 let particles = [];
 
@@ -399,6 +400,12 @@ function checkCollision(rect1, rect2) {
 
 // ゲーム初期化
 function initGame() {
+    // 既存のゲームループをキャンセル
+    if (animationId) {
+        cancelAnimationFrame(animationId);
+        animationId = null;
+    }
+    
     gameState = {
         isRunning: true,
         isPaused: false,
@@ -415,6 +422,9 @@ function initGame() {
     barriers = [];
     ufo = null;
     particles = [];
+    
+    // タイマーリセット
+    invaderMoveTimer = 0;
 
     // インベーダー生成
     for (let row = 0; row < GAME_CONFIG.INVADER_ROWS; row++) {
@@ -583,7 +593,7 @@ function gameLoop() {
     // ゲーム状態チェック
     checkGameState();
     
-    requestAnimationFrame(gameLoop);
+    animationId = requestAnimationFrame(gameLoop);
 }
 
 // 衝突判定処理
@@ -602,7 +612,7 @@ function checkCollisions() {
         }
         
         // プレイヤーの弾とUFO
-        if (ufo && checkCollision(playerBullet, ufo)) {
+        if (playerBullet && ufo && checkCollision(playerBullet, ufo)) {
             gameState.score += ufo.getScore();
             ufo = null;
             playerBullet = null;
@@ -721,6 +731,7 @@ document.addEventListener('keydown', (e) => {
             break;
         case 'Enter':
             if (!gameState.isRunning) {
+                hideGameOverScreen();
                 initGame();
                 gameLoop();
             }
